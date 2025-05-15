@@ -47,6 +47,7 @@ export class TemplateCreateOneController {
     const template = await this.templateCreateService.createOne({
       templateData: {
         fileType,
+        fileName: Buffer.from(file.originalname, 'latin1').toString('utf8'),
         file: file.buffer,
       },
     });

@@ -8,6 +8,7 @@ services:
     volumes:
       - /usr/src/app/node_modules
       - .:/usr/src/app
+      - ../../ofair/storage/pdfs:/tmp/pdfs
     ports:
       - ${PORT}:${PORT}
       - 9229:9229
@@ -30,7 +31,7 @@ services:
       POSTGRES_DB: converter
       PG_DATA: /var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5433:5432
     volumes:
       - converter-pgdata:/var/lib/postgresql/data
 networks:

@@ -1,4 +1,4 @@
-import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 
 import { Transformer } from '@shared/transformer/transformer';
@@ -11,7 +11,16 @@ export class FillTemplateRequestPayloadDTO {
   @Expose()
   @ApiProperty({
     type: 'object',
-    example: { name: 'john', surname: 'doe', users: [{ name: 'Jack' }, { name: 'Miro' }] },
+    example: {
+      user: {
+        name: 'john',
+        age: 20
+      },
+      users: [
+        { name: 'Jack' },
+        { name: 'Miro' }
+      ],
+    },
   })
   public parameters: Record<string, any>;
 

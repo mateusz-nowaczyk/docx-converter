@@ -1,5 +1,6 @@
 export interface CreateTemplateData {
   readonly fileType: string;
+  readonly fileName: string;
   readonly file: Buffer;
 }
 

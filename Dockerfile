@@ -11,15 +11,15 @@ RUN npm install
 COPY . .
 
 RUN set -xe \
-    && apk add --no-cache --purge -uU \
        && apk update \
        && apk upgrade \
+       && apk add --no-cache --purge -uU \
         curl icu-libs unzip zlib-dev musl \
         mesa-gl mesa-dri-swrast \
         openjdk8 \
         libreoffice libreoffice-base libreoffice-lang-uk \
         ttf-freefont ttf-opensans ttf-ubuntu-font-family ttf-inconsolata \
-	ttf-liberation ttf-dejavu \
+	    ttf-liberation ttf-dejavu \
         zip \
         libstdc++ dbus-x11 \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
@@ -50,7 +50,7 @@ RUN set -xe \
         mesa-gl mesa-dri-swrast \
         libreoffice libreoffice-base libreoffice-lang-uk \
         ttf-freefont ttf-opensans ttf-ubuntu-font-family ttf-inconsolata \
-	ttf-liberation ttf-dejavu \
+	    ttf-liberation ttf-dejavu \
         zip \
         libstdc++ dbus-x11 \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \

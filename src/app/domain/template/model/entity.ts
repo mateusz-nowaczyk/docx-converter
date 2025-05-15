@@ -41,6 +41,11 @@ export class Template {
   @Column({ type: 'text' })
   public fileType: string;
 
+  @IsString()
+  @Expose()
+  @Column({ type: 'text' })
+  public fileName: string;
+
   @Expose()
   @Column({ type: 'bytea' })
   public file: Buffer;

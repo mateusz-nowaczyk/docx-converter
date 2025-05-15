@@ -36,6 +36,14 @@ export class TemplateTransformService {
 
     template.fileType = 'PDF';
     template.file = await this.fileSystemService.readFile(`/usr/src/app/${pdfName}`);
+
+    // check if dir for PDFs exists, if not create it
+    const dir = '/tmp/pdfs';
+    if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir);
+    }
+
+    await this.fileSystemService.saveFile(`/tmp/pdfs/${pdfName}`, template.file);
     await this.fileSystemService.deleteFile(`/usr/src/app/${pdfName}`);
 
     this.loggerService.info('PDF deleted from file system');
@@ -75,7 +83,7 @@ export class TemplateTransformService {
 
     //zip file
     this.loggerService.info('zip file');
-    const zipFile = `cd /tmp/${template.id} && zip -r ${template.id}.${template.fileType} .` 
+    const zipFile = `cd /tmp/${template.id} && zip -r ${template.id}.${template.fileType} .`
     await promisedExec(zipFile);
 
       //read file
@@ -92,7 +100,7 @@ export class TemplateTransformService {
      const closeTag = /&gt;/g
 
      return content.replace(openTag, "<").replace(closeTag, ">");
-    }  
+    }
 
 
     public async renderFile(fileName : string, params: Record<string, any> ): Promise<void>{
@@ -107,7 +115,7 @@ export class TemplateTransformService {
     this.loggerService.info('remove dir');
     await promisedExec(removeDir);
    }
-   
+
 
    public async renderEveryFile(files: string[], dir: string, params: Record<string,any>):Promise<void>{
      for (const file of files) {
@@ -119,7 +127,7 @@ export class TemplateTransformService {
     //read all files from folder
     this.loggerService.info('get files from dir');
     const foundedFiles =  await this.fileSystemService.readDir(`/tmp/${template.id}/ppt/slides/`);
-      
+
     // filter out not slides
     const filterSlides = (file : string):boolean => file.includes("slide");
 
@@ -134,7 +142,7 @@ export class TemplateTransformService {
     //read all files from folder
     this.loggerService.info('get files from dir');
     const foundedFiles =  await this.fileSystemService.readDir(wordDir);
-      
+
     // filter out not slides
     const filterSlides = (file : string):boolean => file.includes("document");
 

@@ -22,5 +22,9 @@ export class SerializedTemplateDTO {
   @ApiFileTypeProperty()
   public readonly fileType: string;
 
+  @Expose()
+  @ApiFileTypeProperty()
+  public readonly fileName: string;
+
   public static of = Transformer.createDTOFactory(SerializedTemplateDTO);
 }

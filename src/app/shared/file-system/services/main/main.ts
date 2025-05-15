@@ -44,6 +44,10 @@ export class FileSystemService {
     return await fsPromised.unlink(fullName);
   }
 
+  public async makeDir(dir: string): Promise<string> {
+    return await fsPromised.mkdir(dir, { recursive: true });
+  }
+
   public async readDir(dir: string): Promise<string[]> {
     return await fsPromised.readdir(dir);
   }
